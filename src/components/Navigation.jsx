@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navigation = () => (
-  <ul>
+  <div>
     <li><Link to="/launches">Launches</Link></li>
-  </ul>
+  </div>
 );
 
 export default Navigation;

@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Launch extends Component {
-
-  render() {
-
-    let launch = this.props.launch;
+//Changed to functional component 
+const Launch = ({ launch }) => {
 
     return (
-      <li>
+      <li className="list-group-item">
         <h2> { launch.mission_name } </h2>
-        <div> Flight Number: { launch.flight_number } </div>
+        <p> Flight Number: { launch.flight_number } </p>
       </li>
     );
   }
-}
 
 export default Launch;

@@ -1,50 +1,35 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import ConnectedView from './ConnectedView';
 import {fetchLaunchesIfNeeded} from "../actions/Launches";
 import Launch from '../components/Launch';
 
-class LaunchesView extends Component {
-  componentDidMount() {
-    const { dispatch, launchesCollection } = this.props;
-    fetchLaunchesIfNeeded({ dispatch, launchesCollection });
-  }
+//Changed class component to functional component
+const LaunchesView = ({ launchCollection, dispatch }) => {
+  
+  useEffect(() =>{//onMounth will load and render data
+    fetchLaunchesIfNeeded({ dispatch, launchCollection });
+  }, [])
 
-  getContent() {
-    const { launchCollection } = this.props;
+  const getContent = () => {
 
     if (!launchCollection || launchCollection.fetching) {
       return <div> LOADING </div>;
-    }
-
-    if (!launchCollection.launches.length) {
+    }if (!launchCollection.launches.length) {
       return <div> NO DATA </div>;
     }
 
-    let launches = [];
-
-    for (let i = 0; i < launchCollection.launches.length; i++) {
-      const launch = launchCollection.launches[i];
-
-      launches.push(
-        <Launch {...{
-          key: launch.launch_id,
-          launch
-        }} />
-
-      )
-    }
-
-    return <ul>{launches}</ul>;
+    //one liner for creating collection of Launch elements
+    const launches = launchCollection.launches.map((launch) =>{
+      return <Launch {...{ key: launch.launch_id, launch }} />
+    });
+    return <ul className="list-group">{launches}</ul>;
   }
-
-  render() {
     return (
       <div>
         <h2> SpaceX launches </h2>
-        {this.getContent()}
+        {getContent()}
       </div>
     );
   }
-}
 
 export default ConnectedView(LaunchesView, 'launches');
