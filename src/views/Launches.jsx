@@ -12,6 +12,7 @@ class LaunchesView extends Component {
   getContent() {
     const { launchCollection } = this.props;
 
+    console.log(this.props)
     if (!launchCollection || launchCollection.fetching) {
       return <div> LOADING </div>;
     }
