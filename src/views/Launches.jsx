@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import ConnectedView from './ConnectedView';
-import {fetchLaunchesIfNeeded} from "../actions/Launches";
+import {fetchLaunchesIfNeeded} from "../actions/actions";
 import Launch from '../components/Launch';
 
 //Changed class component to functional component
 const LaunchesView = ({ launchCollection, dispatch }) => {
   
-  useEffect(() =>{//onMounth will load and render data
+  useEffect(() =>{//onMount will load data
     fetchLaunchesIfNeeded({ dispatch, launchCollection });
   }, [])
 
   const getContent = () => {
-
-    console.log(this.props)
+   
     if (!launchCollection || launchCollection.fetching) {
       return <div> LOADING </div>;
     }if (!launchCollection.launches.length) {
@@ -21,7 +20,7 @@ const LaunchesView = ({ launchCollection, dispatch }) => {
 
     //one liner for creating collection of Launch elements
     const launches = launchCollection.launches.map((launch) =>{
-      return <Launch {...{ key: launch.launch_id, launch }} />
+      return <Launch {...{ key: launch.launch_id, launch, dispatch, launchCollection }} />
     });
     return <ul className="list-group">{launches}</ul>;
   }

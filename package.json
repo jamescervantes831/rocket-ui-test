@@ -19,7 +19,7 @@
   "license": "MIT",
   "homepage": "https://github.com/ReactJSResources/react-webpack-babel#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.24.0",
     "babel-polyfill": "6.26.0",
     "dotenv": "^10.0.0",
     "node-sass": "^6.0.1",
